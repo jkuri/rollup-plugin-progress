@@ -18,11 +18,6 @@ export default function progress(options = {}) {
     loaded: 0
   };
 
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
   return {
     name: 'progress',
     load(id) {
