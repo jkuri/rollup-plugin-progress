@@ -36,7 +36,7 @@ export default function progress(options = {}) {
         }
         process.stdout.write(`Building (${chalk.red(progress.loaded)}): ${chalk.blue(file)}`);
       } else {
-        console.log(`Building (${chalk.red(progress.loaded)}): ${chalk.blue(file)}`);
+        console.log(`Building (${chalk.red(progress.loaded)}): ${chalk.yellow(file)}`);
       }
     },
     ongenerate() {
