@@ -2,9 +2,7 @@
 
 Show current module being transpiled by the rollup bundler.
 
-<p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/1796022/20892259/ba1cf87a-bb0d-11e6-9e09-fb680a3a392d.gif">
-</p>
+<img src="https://cloud.githubusercontent.com/assets/1796022/20893960/02d1b622-bb14-11e6-8ef5-dd5282248ecb.gif">
 
 ### Installation
 
