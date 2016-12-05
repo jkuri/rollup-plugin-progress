@@ -1,6 +1,7 @@
 import 'fs';
 import path from 'path';
 import chalk from 'chalk';
+import readline from 'readline';
 import { createFilter } from 'rollup-pluginutils';
 
 function normalizePath(id) {
@@ -19,6 +20,11 @@ function progress(options) {
     loaded: 0
   };
 
+  var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
   return {
     name: 'progress',
     load: function load(id) {
@@ -31,22 +37,23 @@ function progress(options) {
         return;
       }
 
-      if (options.clearLine) {
-        if (typeof process.stdout.clearLine === 'function') {
-          process.stdout.clearLine();
-          process.stdout.cursorTo(0);
+      if (options.clearLine && process.stdin.isTTY) {
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        var output = "(" + (chalk.red(progress.loaded)) + "): " + (chalk.yellow(file));
+        if (output.length < process.stdout.columns) { 
+          process.stdout.write(output);
+        } else {
+          process.stdout.write(output.substring(0, process.stdout.columns - 1));
         }
-        process.stdout.write(("Building (" + (chalk.red(progress.loaded)) + "): " + (chalk.blue(file))));
       } else {
-        console.log(("Building (" + (chalk.red(progress.loaded)) + "): " + (chalk.blue(file))));
+        console.log(("(" + (chalk.red(progress.loaded)) + "): " + (chalk.yellow(file))));
       }
     },
     ongenerate: function ongenerate() {
       if (options.clearLine) {
-        if (typeof process.stdout.clearLine === 'function') {
-          process.stdout.clearLine();
-          process.stdout.cursorTo(0);
-        }
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
       }
     }
   };
