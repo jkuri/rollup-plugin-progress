@@ -1,7 +1,7 @@
 import 'fs';
 import path from 'path';
 import chalk from 'chalk';
-import readline from 'readline';
+import 'readline';
 import { createFilter } from 'rollup-pluginutils';
 
 function normalizePath(id) {
@@ -19,11 +19,6 @@ function progress(options) {
   var progress = {
     loaded: 0
   };
-
-  var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
 
   return {
     name: 'progress',

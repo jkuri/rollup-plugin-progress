@@ -44,7 +44,7 @@ export default function progress(options = {}) {
       }
     },
     ongenerate() {
-      if (options.clearLine) {
+      if (options.clearLine && process.stdin.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
       }

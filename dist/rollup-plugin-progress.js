@@ -5,7 +5,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var fs = require('fs');
 var path = _interopDefault(require('path'));
 var chalk = _interopDefault(require('chalk'));
-var readline = _interopDefault(require('readline'));
+var readline = require('readline');
 var rollupPluginutils = require('rollup-pluginutils');
 
 function normalizePath(id) {
@@ -23,11 +23,6 @@ function progress(options) {
   var progress = {
     loaded: 0
   };
-
-  var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
 
   return {
     name: 'progress',
