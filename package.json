@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-progress",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rollup Progress Plugin",
   "main": "dist/rollup-plugin-progress.js",
   "module": "dist/rollup-plugin-progress.esm.js",
