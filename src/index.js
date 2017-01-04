@@ -40,7 +40,7 @@ export default function progress(options = {}) {
           process.stdout.write(output.substring(0, process.stdout.columns - 1));
         }
       } else {
-        console.log(`(${chalk.red(progress.loaded)}): file`);
+        console.log(`(${chalk.red(progress.loaded)}): ${file}`);
       }
     },
     ongenerate() {
