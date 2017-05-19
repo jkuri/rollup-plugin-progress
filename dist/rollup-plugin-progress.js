@@ -21,6 +21,7 @@ function progress(options) {
 
   var filter = rollupPluginutils.createFilter(options.include, options.exclude);
   var total = 0;
+  var totalFilePath = path.resolve(__dirname, "./total.txt");
   try {
     total = fs.readFileSync(totalFilePath);
   } catch (e) {
@@ -46,7 +47,7 @@ function progress(options) {
       if (options.clearLine && process.stdin.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
-    var output = "";
+        var output = "";
         if (progress.total > 0) {
           var percent = Math.round(100 * progress.loaded / progress.total);
           output += Math.min(100, percent) + "% ";
@@ -62,6 +63,7 @@ function progress(options) {
       }
     },
     ongenerate: function ongenerate() {
+	  fs.writeFileSync(totalFilePath, progress.loaded);
       if (options.clearLine && process.stdin.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
