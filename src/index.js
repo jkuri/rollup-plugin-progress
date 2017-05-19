@@ -15,6 +15,7 @@ export default function progress(options = {}) {
 
   const filter = createFilter(options.include, options.exclude);
   let total = 0;
+  const totalFilePath = path.resolve(__dirname, "./total.txt");
   try {
     total = fs.readFileSync(totalFilePath);
   } catch (e) {
@@ -56,6 +57,7 @@ export default function progress(options = {}) {
       }
     },
     ongenerate() {
+      fs.writeFileSync(totalFilePath, progress.loaded);
       if (options.clearLine && process.stdin.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
