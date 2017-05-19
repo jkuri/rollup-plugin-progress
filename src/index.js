@@ -5,7 +5,7 @@ import readline from 'readline';
 import { createFilter } from 'rollup-pluginutils';
 
 function normalizePath(id) {
-	return path.relative(process.cwd(), id).split(path.sep).join('/');
+  return path.relative(process.cwd(), id).split(path.sep).join('/');
 }
 
 export default function progress(options = {}) {
@@ -14,7 +14,14 @@ export default function progress(options = {}) {
   }
 
   const filter = createFilter(options.include, options.exclude);
+  let total = 0;
+  try {
+    total = fs.readFileSync(totalFilePath);
+  } catch (e) {
+    fs.writeFileSync(totalFilePath, 0);
+  }
   let progress = {
+    total: total,
     loaded: 0
   };
 
@@ -33,7 +40,12 @@ export default function progress(options = {}) {
       if (options.clearLine && process.stdin.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
-        let output = `(${chalk.red(progress.loaded)}): ${file}`;
+        let output = "";
+        if (progress.total > 0) {
+          let percent = Math.round(100 * progress.loaded / progress.total);
+          output += Math.min(100, percent) + "% ";
+        }
+        output += `(${chalk.red(progress.loaded)}): ${file}`;
         if (output.length < process.stdout.columns) {
           process.stdout.write(output);
         } else {
