@@ -56,7 +56,7 @@ export default function progress(options = {}) {
         console.log(`(${chalk.red(progress.loaded)}): ${file}`);
       }
     },
-    ongenerate() {
+    generateBundle() {
       fs.writeFileSync(totalFilePath, progress.loaded);
       if (options.clearLine && process.stdin.isTTY) {
         process.stdout.clearLine();
