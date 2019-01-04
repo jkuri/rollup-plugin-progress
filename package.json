@@ -24,8 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "chalk": "^1.1.3",
-    "rollup-pluginutils": "^1.5.1"
+    "chalk": "^1.1.3"
   },
   "devDependencies": {
     "rollup": "^1.0.0",

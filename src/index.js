@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
-import readline from 'readline';
-import { createFilter } from 'rollup-pluginutils';
 
 function normalizePath(id) {
   return path.relative(process.cwd(), id).split(path.sep).join('/');
@@ -13,7 +11,6 @@ export default function progress(options = {}) {
     options.clearLine = true;
   }
 
-  const filter = createFilter(options.include, options.exclude);
   let total = 0;
   const totalFilePath = path.resolve(__dirname, "./total.txt");
   try {
@@ -21,15 +18,14 @@ export default function progress(options = {}) {
   } catch (e) {
     fs.writeFileSync(totalFilePath, 0);
   }
-  let progress = {
+  const progress = {
     total: total,
     loaded: 0
   };
 
   return {
     name: 'progress',
-    load(id) {
-      const file = normalizePath(id);
+    load() {
       progress.loaded += 1;
     },
     transform(code, id) {
