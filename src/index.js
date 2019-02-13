@@ -34,7 +34,7 @@ export default function progress(options = {}) {
         return;
       }
 
-      if (options.clearLine && process.stdin.isTTY) {
+      if (options.clearLine && process.stdout.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
         let output = "";
@@ -54,7 +54,7 @@ export default function progress(options = {}) {
     },
     generateBundle() {
       fs.writeFileSync(totalFilePath, progress.loaded);
-      if (options.clearLine && process.stdin.isTTY) {
+      if (options.clearLine && process.stdout.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
       }
