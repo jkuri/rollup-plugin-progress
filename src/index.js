@@ -53,7 +53,7 @@ export default function progress(options = {}) {
       }
     },
     generateBundle() {
-      fs.writeFileSync(totalFilePath, progress.loaded);
+      fs.writeFileSync(totalFilePath, String(progress.loaded));
       if (options.clearLine && process.stdout.isTTY) {
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
