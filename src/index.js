@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
+import os from "os";
 
 function normalizePath(id) {
   return path.relative(process.cwd(), id).split(path.sep).join('/');
@@ -12,7 +13,7 @@ export default function progress(options = {}) {
   }
 
   let total = 0;
-  const totalFilePath = path.resolve(__dirname, "./total.txt");
+  const totalFilePath = path.resolve(os.tmpdir(), "./rollup-plugin-progress");
   try {
     total = fs.readFileSync(totalFilePath);
   } catch (e) {
